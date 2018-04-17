@@ -1,26 +1,19 @@
-/*
-	By Osvaldas Valutis, www.osvaldas.info
-	Available for use under the MIT License
-*/
+/* 
+ * Modal Animated V1.2
+ * Richiede:
+ * - animate.css - http://daneden.me/animate v3.5.1
+ * - Bootstrap 3.3.6 / 4.0.0 o superiore  - http://getbootstrap.com/
+ * Copyright VidalWeb
+ * version 1.2
+ * Create 2016-09-26 - last modify 2018-04-17
+ * - Inserire questo nel vostro CSS o style :
+ * - Dopo di che potete godere di questo script
+ * - Copyright: VidalWeb
+ */
 
-
-
-/* Modal Animated V1.2 - Bootstrap 3.3.6 / 4.0.0 o superiore | Copyright VidalWeb.com */
 (function ($) {
     "use strict";
-    
-    /* 
-     * Start animated Modal 
-     * Richiede:
-     * - animate.css - http://daneden.me/animate v3.5.1
-     * - Bootstrap 3.3.7 / 4.0.0 o superiore  - http://getbootstrap.com/
-     * Config VidalWeb
-     * version 1.2
-     * Create 26-09-2016
-     * - Inserire questo nel vostro CSS o style :
-     * - Dopo di che potete godere di questo script
-     * - Copyright: VidalWeb
-     */
+
     var NAME = 'modal';
     if (typeof $.fn[NAME] === "undefined") {
         window.console.error("Modal Animated richiede Bootstrap.js 3.3.6 o superiore !");
