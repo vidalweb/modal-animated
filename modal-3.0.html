@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Modal Animated</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<link href="dist/animate.css" rel="stylesheet">
+<link href="dist/animate-plus.css" rel="stylesheet">
+<link href="dist/modal-animated.css" rel="stylesheet">
+<!--
+<script src="../jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+-->
+<script src="../jquery/jquery.3.min.js"></script>
+<script src="../jquery/jquery-ui.min.js"></script>
+<script src="../bootstrap/js/bootstrap.min.js"></script>
+<script src="dist/jquery.ui.touch-punch.js"></script>
+<script src="dist/modal-animated.js"></script>
+<script>
+$(document).ready(function(){
+  
+   //------------------------------------
+   $('[data-toggle="popupx"]').on('click',function(e) {
+      var _this = this; // /^true$/i.test(
+		var that = $(_this).data('target');
+      $(_this).ModalAnimated({
+            'animate-in-back': 'fadeIn' // rollIn
+      });
+      /*
+      'target': null,
+      'body-add-class': '', // serve per aggiungere classe al body | utile per modal-backdro Esempio: backoverlay dopo lo posso gestiore come voglio
+      'animated': 'true',
+      'animate-close': 'true',
+      'animate-in': 'zoomIn',
+      'animate-out': 'zoomOut',
+      'animate-in-time': '0.35s',
+      'animate-in-delay': '-0.15s',
+      'animate-out-time': '0.40s',
+      'animate-out-delay': '',
+      'animate-in-back': 'fadeIn', // backdrop
+      'animate-out-back': '', // backdrop -> fadeOut
+      'animate-back-time': '0.30s', // backdrop
+      'animate-back-delay': '', // backdrop
+      'md-backdrop': 'true',
+      'md-dialogclass': null, // add class al dialogo
+      'md-keyboard': 'true',
+      'md-sheer': 'false', // trasparente 
+      'md-draggable': 'false',
+      'md-drag-containment': 'false', // parent,body
+      'md-minimize': 'false',
+      'md-center': 'true',
+      'md-center-absolute': 'true',
+      'md-center-heightplus': null, // aumentare il completamento della finestra in height | Es.: 50
+      'md-center-minheight': null, // distanza da top e bottom
+      'md-center-maxheight': 611, // max mobile 
+      'fn-draggable': {} // la posibilita di cambiare le impostazione draggable Es.: {stop:function(){},handle: ".modal-title"}
+                         // handle: ".modal-title", //-> Default
+                         // cursor: 'move',  //-> Default
+      */
+		e.stopImmediatePropagation();//e.stopPropagation();
+		e.preventDefault();
+   }); // click popupx
+
+    /*
+    $('#myModal').on('show.bs.modal', function (e) {
+        console.log('show.bs.modal');
+    }).on('shown.bs.modal', function (e) {
+        console.log('shown.bs.modal');
+        return false;
+    }).on('hide.bs.modal', function (e) {
+        console.log('hide.bs.modal');
+        
+    }).on('hidden.bs.modal', function (e) {
+        console.log('hidden.bs.modal');
+    });
+    */
+
+});
+</script>
+<style>
+/*configurazione extra non importante */
+.modal-content {
+  /*border-radius: 0px;*/
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .3);
+          box-shadow: 0 3px 9px rgba(0, 0, 0, .3);
+ }
+
+
+/*--------------------*/
+/* UL LIST RESPONSIVE */
+/*--------------------*/
+.bs-botones {
+   padding-left: 0;
+   padding-bottom: 1px;
+   margin-bottom: 20px;
+   list-style: none;
+   overflow: hidden;
+}
+.bs-botones li {
+   float: left;
+   width: 12.5%;
+   height: 115px;
+   padding: 0px;
+   margin: 0;
+   text-align: center;
+   cursor: pointer;
+}
+.bs-botones li .ssl{
+   display: block;
+   font-size: 13px;
+   height: calc(100% - 5px);
+   border: 1px solid #ddd;
+   padding: 10px 8px;
+   margin: 0 5px 5px 0;
+   word-wrap: break-word;
+   overflow: hidden;
+}
+.bs-botones li .ssl:hover {
+   background-color: rgba(138,138,138,0.1);
+}
+ul.bs-botones li .ssl b {
+   display: block;
+   word-spacing: normal;
+   margin-bottom:3px;
+   font-weight: 400;
+   color: #818181;
+}
+.bs-botones .icn {
+   margin-top: 0px;
+   margin-bottom: 5px;
+   font-size: 24px;
+   font-style: normal;
+}
+.bs-botones .icn:before{
+   font-family: FontAwesome;
+   content:"\f108";  
+}
+.bs-botones .sls {
+   display: block;
+   text-align: center;
+   word-wrap: break-word;
+}
+/* view 4 item */
+@media (max-width: 767px) {
+   .bs-botones li {
+     width: 25%;
+   }
+}
+/* view 3 item */
+@media (max-width: 480px) {
+   .bs-botones li {
+      width: 33.33333333%;
+   }
+}
+/* view 2 item */
+@media (max-width: 321px) {
+   .bs-botones li {
+      width: 50%;
+   }
+}
+
+
+</style>
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <h3>modal-animated.js</h3>
+      <ul>
+        <li> VidalWeb System Modal Animated </li>
+        <li> Dipendete: </li>
+        <li> - jQuery + Jquery Ui 11.4 o superiore</li>
+        <li> - Bootstrap 3.3.6/4.1.0 o superiore</li>
+        <li> - Animate CSS 5.1 o superiore </li>
+        <li> IE9 + supportato </li>
+        <li> Meno di 7.16KB quando gzip e minified </li>
+        <li> Completamente unita testata </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+    
+    <ul class="bs-botones">
+    
+         <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="newPaperIn" 
+            data-animate-in-time="0.55s" 
+            data-animate-in-delay ="0" 
+            data-animate-out="newPaperOut" 
+            data-animate-out-time="0.55s" 
+            data-animate-out-delay ="0" 
+            data-md-backdrop="true" 
+            data-md-dialogclass="s750" 
+            data-md-minimize="true" 
+             >
+             <span class="ssl">
+                <i class="icn"></i>
+                <span class="sls">newPaper In/Out<b>Effetto</b></span>
+             </span>
+        </li> 
+
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="xflipInY" 
+            data-animate-in-time="0.30s" 
+            data-animate-in-delay ="0" 
+            data-animate-out="xflipOutY" 
+            data-animate-out-time="0.30s" 
+            data-animate-out-delay ="0" 
+            data-md-backdrop="true" 
+             >
+             <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">xflip InY/OutY<b>Effetto</b></span>
+             </span>
+         </li> 
+         <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="xflipInX" 
+            data-animate-in-time="0.40s" 
+            data-animate-in-delay ="0" 
+            data-animate-out="xflipOutX" 
+            data-animate-out-time="0.40s" 
+            data-animate-out-delay ="0" 
+            data-md-backdrop="true" 
+             >
+             <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">xflip InX/OutX<b>Effetto</b></span>
+             </span>
+         </li> 
+         <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="slideFall" 
+            data-animate-in-time="0.50s" 
+            data-animate-in-delay ="0" 
+            data-animate-out="zoomScaleOut" 
+            data-animate-out-time="0.30s" 
+            data-animate-out-delay ="0" 
+            data-md-backdrop="true" 
+             >
+             <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">slideFall<b>zoomScaleOut</b></span>
+             </span>
+         </li>
+         
+         <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="slitIn" 
+            data-animate-in-time="0.50s" 
+            data-animate-in-delay ="0" 
+            data-animate-out="slitOut" 
+            data-animate-out-time="0.50s" 
+            data-animate-out-delay ="0" 
+            data-md-backdrop="true" 
+             >
+             <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">slit In/Out<b>Effetto</b></span>
+             </span>
+         </li>
+         
+         <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="zoomScaleIn" 
+            data-animate-in-time="0.30s" 
+            data-animate-in-delay ="0" 
+            data-animate-out="zoomScaleOut" 
+            data-animate-out-time="0.30s" 
+            data-animate-out-delay ="0" 
+            data-md-backdrop="true" 
+             >
+             <span class="ssl">
+                <i class="icn"></i>
+                <span class="sls">zoomScale In/Out<b>Effetto</b></span>
+            </span>
+            </li>
+
+         <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="valIn" 
+            data-animate-in-time="0.50s" 
+            data-animate-in-delay ="0s" 
+            data-animate-out="valOut" 
+            data-animate-out-time="0.50s" 
+            data-animate-out-delay ="0" 
+            data-md-backdrop="true" 
+            >
+            <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">val In/Out<b>Effetto</b></span>
+            </span>   
+            </li>
+            
+         <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="donnaIn" 
+            data-animate-in-time="0.40s" 
+            data-animate-in-delay ="0s" 
+            data-animate-out="donnaOut" 
+            data-animate-out-time="0.40s" 
+            data-animate-out-delay ="0" 
+            data-md-backdrop="true" 
+             >
+             <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">donna In/Out<b>Effetto</b></span>
+             </span>   
+         </li>
+
+         <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="lauraIn" 
+            data-animate-in-time="0.50s" 
+            data-animate-in-delay ="0s" 
+            data-animate-out="lauraOut" 
+            data-animate-out-time="0.50s" 
+            data-animate-out-delay ="0" 
+            data-md-backdrop="true" 
+             >
+             <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">laura In/Out<b>Effetto</b></span>
+             </span>  
+         </li>
+    
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="true" 
+            data-md-draggable="true"
+            data-md-sheer="true" 
+            data-animate-in="zoomIn" 
+            data-md-backdrop="false"
+            data-md-minimize="true"
+            >
+            <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">zoom In/Out<b>draggable / center / sheer</b></span>
+            </span>   
+            </li>
+            
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in-time="0.75s" 
+            data-animate-in="tada" 
+            data-md-backdrop="true" 
+            >
+            <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">tada<b>Effetto</b></span>
+            </span>   
+            </li>
+            
+            
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="bounce" 
+            data-animate-in-time="0.75s" 
+            data-animate-in-delay="" 
+            data-md-backdrop="true" 
+            >
+            <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">bounce<b>Effetto</b></span>
+            </span>
+            </li> 
+            
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="pulse" 
+            data-animate-in-time="0.45s" 
+            data-animate-in-delay ="0" 
+            data-md-backdrop="true" 
+            >
+            <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">pulse<b>Effetto</b></span>
+            </span>
+            </li> 
+
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="true" 
+            data-md-draggable="true"
+            data-animate-in="rubberBand" 
+            data-animate-in-time="0.75s" 
+            data-md-backdrop="true" 
+            data-md-minimize="true"
+            >
+            <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">rubberBand<b>draggable / center</b></span>
+            </span>   
+            </li> 
+            
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in-time="0.75s" 
+            data-animate-in="shake" 
+            data-md-backdrop="true" 
+            >
+            <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">shake<b>Effetto</b></span>
+            </span>
+            </li> 
+            
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="swing" 
+            data-animate-in-time="0.75s" 
+            data-animate-in-delay="0"
+            data-md-backdrop="false" 
+            >
+            <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">swing<b>backdrop false</b></span>
+            </span>   
+        </li>
+
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="wobble" 
+            data-animate-in-time="0.75s" 
+            data-animate-in-delay="0"
+            data-md-backdrop="true" 
+            >
+            <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">wobble<b>backdrop true</b></span>
+            </span>   
+        </li>
+
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="jello" 
+            data-animate-in-time="0.75s" 
+            data-animate-in-delay="0"
+            >
+            <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">jello<b>backdrop true</b></span>
+            </span>   
+        </li>
+
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="bounceIn" 
+            data-animate-in-time="0.75s" 
+            data-animate-in-delay="0"
+            data-animate-out="bounceOut"
+            >
+            <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">bounceIn<b>backdrop true</b></span>
+            </span>   
+        </li>
+
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="bounceInDown" 
+            data-animate-in-time="0.75s" 
+            data-animate-in-delay="0"
+            data-animate-out="bounceOutUp"
+            data-animate-out-time="0.75s" 
+            >
+            <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">bounce InDown/OutUp<b>backdrop true</b></span>
+            </span>   
+        </li>
+
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="bounceInLeft" 
+            data-animate-in-time="0.75s" 
+            data-animate-in-delay="0"
+            data-animate-out="bounceOutRight"
+            data-animate-out-time="0.75s" 
+            >
+            <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">bounceOut Left/Right<b>backdrop true</b></span>
+            </span>   
+        </li>
+
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="bounceInUp" 
+            data-animate-in-time="0.75s" 
+            data-animate-in-delay="0"
+            data-animate-out="bounceOutUp"
+            data-animate-out-time="0.75s" 
+            >
+            <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">bounce InUp/OutUp<b>backdrop true</b></span>
+            </span>   
+        </li>
+
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="fadeInLeft" 
+            data-animate-in-time="0.75s" 
+            data-animate-in-delay="0"
+            data-animate-out="fadeOutRight"
+            data-animate-out-time="0.75s" 
+            >
+            <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">fade In/Out Left/Right<b>backdrop true</b></span>
+            </span>   
+        </li>
+        
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="fadeInDown" 
+            data-animate-in-time="0.75s" 
+            data-animate-in-delay="0"
+            data-animate-out="fadeOutDown"
+            data-animate-out-time="0.75s" 
+            >
+            <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">fade In/Out Down<b>backdrop true</b></span>
+            </span>   
+        </li>        
+
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="lightSpeedIn" 
+            data-animate-in-time="0.55s" 
+            data-animate-in-delay="0"
+            data-animate-out="lightSpeedOut"
+            data-animate-out-time="0.50s" 
+            >
+            <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">lightSpeed In/Out<b>backdrop true</b></span>
+            </span>   
+        </li>
+        
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="rollIn" 
+            data-animate-in-time="0.65s" 
+            data-animate-in-delay="0"
+            data-animate-out="rollOut"
+            data-animate-out-time="0.65s" 
+            >
+            <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">roll In/Out<b>backdrop true</b></span>
+            </span>   
+        </li>
+
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="flipInY" 
+            data-animate-in-time="0.55s" 
+            data-animate-in-delay ="0" 
+            data-animate-out="flipOutY" 
+            data-animate-out-time="0.55s" 
+            data-animate-out-delay ="0" 
+            data-md-backdrop="true" 
+             >
+             <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">flip InY/OutY<b>Effetto</b></span>
+             </span>   
+        </li>
+
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="flipInX" 
+            data-animate-in-time="0.55s" 
+            data-animate-in-delay ="0" 
+            data-animate-out="flipOutX" 
+            data-animate-out-time="0.55s" 
+            data-animate-out-delay ="0" 
+            data-md-backdrop="true" 
+             >
+             <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">flip InX/OutX<b>Effetto</b></span>
+             </span>
+        </li> 
+
+
+        <li 
+            data-toggle="popupx" 
+            data-target="#myModal" 
+            data-md-center="false" 
+            data-animate-in="slideInUp" 
+            data-animate-in-time="0.55s" 
+            data-animate-in-delay ="0" 
+            data-animate-out="slideOutUp" 
+            data-animate-out-time="0.55s" 
+            data-animate-out-delay ="0" 
+            data-md-backdrop="true" 
+             >
+             <span class="ssl">
+               <i class="icn"></i>
+               <span class="sls">slideIn Up/Down<b>Effetto</b></span>
+             </span>
+        </li> 
+      </ul><!-- /bs-botones -->
+      
+      
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+
+    </div><!--/col -->
+  </div><!--/row -->
+  
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i aria-hidden="true" class="fa fa-times"></i></button>
+        <h4 class="modal-title" id="myModalLabel">Modal Animated</h4>
+      </div>
+      <div class="modal-body" aria-expanded="true">
+        <p>In una terra lontana, dietro le montagne Parole, lontani dalle terre di Vocalia e Consonantia, vivono i testi casuali. Vivono isolati nella cittadina di Lettere, sulle coste del Semantico, un immenso oceano linguistico. Un piccolo ruscello chiamato Devoto Oli attraversa quei luoghi, rifornendoli di tutte le regolalie di cui hanno bisogno. È una terra paradismatica, un paese della cuccagna in cui golose porzioni di proposizioni arrostite volano in bocca a chi le desideri. Non una volta i testi casuali sono stati dominati dall’onnipotente Interpunzione, una vita davvero non ortografica. <br>
+    Un giorno però accadde che la piccola riga di un testo casuale, di nome Lorem ipsum, decise di andare a esplorare la vasta Grammatica. Il grande Oximox tentò di dissuaderla, poiché quel luogo pullulava di virgole spietate, punti interrogativi selvaggi e subdoli punti e virgola, ma il piccolo testo casuale non si fece certo fuorviare. Raccolse le sue sette maiuscole, fece scorrere la sua iniziale nella cintura, e si mise in cammino. Quando superò i primi colli dei monti Corsivi, si voltò a guardare un’ultima volta la skyline di Lettere, la sua città, la headline del villaggio Alfabeto e la subline della sua stessa strada, il vicolo Riga. Una domanda retorica</p>
+      </div><!--/modal-body-->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Chiudi</button>
+        <button type="button" class="btn btn-sm btn-primary">Salva</button>
+      </div>
+    </div>
+  </div>
+</div><!--/modal -->
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="Dialogos" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i aria-hidden="true" class="fa fa-times"></i></button>
+        <h4 class="modal-title">Modal Animated</h4>
+      </div>
+      <div class="modal-body" aria-expanded="true"></div><!--/modal-body-->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Chiudi</button>
+        <button type="button" class="btn btn-sm btn-primary">Salva</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--/modal -->
+
+
+
+</body>
+</html>
