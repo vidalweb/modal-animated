@@ -490,9 +490,6 @@
                 } else {
                     _sClose(that);
                 }
-                if (window.ladro_time){
-                    window.clearTimeout(window.ladro_time);    
-                }
             },
             // version 3.6/7
             backdrop: function (_rtarget) {
@@ -549,9 +546,7 @@
                 //if( s.WebkitTransition === '' )	{prefixTransition = '-webkit-';}
                 //if( s.MozTransition === '' )	{prefixTransition = '-moz-';}
                 //var _duration;
-                /*
-                if( ( prefixAnimation === '' && !( 'animation' in s ) ){  } else if window.getComputedStyle( this )[ prefixAnimation + 'animation-duration' ] === '0s' ) 
-                */
+                //if( ( prefixAnimation === '' && !( 'animation' in s ) ){  } else if window.getComputedStyle( this )[ prefixAnimation + 'animation-duration' ] === '0s' ) 
                 //window.getComputedStyle(el[0], null).getPropertyValue("animation-duration").replace(/[^\.\d]/g, ''); //transition-duration
                 return window.getComputedStyle( options.element[0] )[ prefixAnimation + 'animation-duration' ].replace(/[^\.\d]/g, '');
 
@@ -612,9 +607,6 @@
                     // $(this).off(e);
                     //});
                 }
-                /**/
-                
-                /**/
                 
                 elAnimated.removeData('animationadd').removeClass(addAnimated+' zoomIn');
                 elAnimated.data('animationadd', addAnimated);
@@ -628,7 +620,7 @@
                     //console.log('Hombre md-visual('+_mdvisual+') (callback: '+callback+') ('+$(thist).data('animationadd')+') '+addAnimated);
                     $(thist).removeData('animationadd');
                     _sDelayDuration(thist, null, null); // clear css
-                    if ( _mdvisual === 'hide') { //if (callback === true) {
+                    if ( _mdvisual === 'hide' ) { //if (callback === true) {
                         // console.log('PERCHE SUCCEDE '+callback);
                         _sClose(that);
                         _sTrigger(element, 'hidden.animatedout.bs.modal', _rtarget);
@@ -639,36 +631,29 @@
                     }
                     //elBack.removeAttr('style').removeClass(addAnimated).removeClass(animateInBack); // remove all animation
                     //$(this).removeClass(addAnimated);
+                    //console.log('complete');
+                    //console.log($(thist));
                     $(thist).off(animationEvent);
+                    window._complete_checktime = true;
                 };
-                /**/
-                //=====================================
                 
+                //=====================================
+                window._complete_checktime = false;
                 elAnimated.one(animationEvent, function () {
                     __complete(elAnimated,that,element,_rtarget);
                 });
-                /*
-                window.__timeCssprop = window.setInterval(function(){
-                    var theCSSprop = window.getComputedStyle(elAnimated[0], null).getPropertyValue("animation-duration"); //transition-duration
-                    $.alert(theCSSprop+'  --- '+theCSSprop1);
-                    if (theCSSprop === '0s' ){
-                        clearInterval(window.__timeCssprop);
-                        $.alert('finalmente');
-                    }
-                },800);
-                */
+
                 var _checktime_in = that.durationAnimationCss({element:elAnimated});
-                //console.log('dentro-> '+_checktime_in);
                 window.__timeCss = window.setTimeout(function(){
                     var _checktime = that.durationAnimationCss({element:elAnimated});
                     //$.alert('finalmente '+_checktime);
-                    if (_checktime !== 0){
+                    if (window._complete_checktime !== true ){ // if (_checktime !== 0 ){
                         //console.log('_checktime ++');
                        __complete(elAnimated,that,element,_rtarget);
                     }
                     //__complete(elAnimated,that,element,callback,_rtarget);
                     //console.log('Klok timeout 1 callback('+callback+') ('+elAnimated.data('animationadd')+') ('+_checktime_in+') '+_checktime);
-                    clearTimeout(window.__timeCss);
+                    window.clearTimeout(window.__timeCss);
                 }, 100+(_checktime_in * 1000));
                 
                 
